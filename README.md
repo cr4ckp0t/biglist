@@ -1,2 +1,3 @@
-# go-biglist
-Download biglist.p2p using Go.
+# biglist.p2p Download Script
+
+A simple script written in [Go](https://golang.org) for 
