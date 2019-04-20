@@ -50,13 +50,14 @@ func main() {
 	}
 
 	// download file using net/http
-	fmt.Printf("Downloading %s. . \n", blockListURL)
+	fmt.Printf("Downloading %s. . .", blockListURL)
 	if err := downloadList(blockListGz, blockListURL); err != nil {
 		panic(err)
 	}
+	fmt.Printf("DONE!\n")
 
 	// open the gzip file
-	fmt.Printf("Decompressing %s. . .\n", blockListGz)
+	fmt.Printf("Decompressing %s. . .", blockListGz)
 	fo, err := os.Open(blockListGz)
 	if err != nil {
 		panic(err)
@@ -78,6 +79,7 @@ func main() {
 	if _, err := io.Copy(fw, zr); err != nil {
 		panic(err)
 	}
+	fmt.Printf("DONE!\n")
 
 	// close the file handlers
 	defer fo.Close()
@@ -85,12 +87,13 @@ func main() {
 	defer fw.Close()
 
 	// clean up
-	fmt.Printf("Cleaning up. . .\n")
+	fmt.Printf("Cleaning up. . .")
 	if _, err := os.Stat(blockListGz); err == nil {
 		os.Remove(blockListGz)
 	}
 
-	fmt.Printf("Done!\n")
+	fmt.Printf("DONE!\n")
+	fmt.Printf("Created file %s.\n", finalList)
 }
 
 // downloads the file using net/http
